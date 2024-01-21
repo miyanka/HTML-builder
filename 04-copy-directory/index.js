@@ -1,16 +1,16 @@
-const fs = require('fs/promises');
+const fsPromises = require('fs/promises');
 const path = require('path');
 
 function makeDir(path) {
-  return fs.mkdir(path, { recursive: true });
+  return fsPromises.mkdir(path, { recursive: true });
 }
 
 function getFiles(path) {
-  return fs.readdir(path);
+  return fsPromises.readdir(path);
 }
 
 function copyFile(srcPath, destPath) {
-  fs.copyFile(srcPath, destPath);
+  fsPromises.copyFile(srcPath, destPath);
 }
 
 function removeAbsentFiles(destPath, srcFiles) {
@@ -19,7 +19,7 @@ function removeAbsentFiles(destPath, srcFiles) {
       destFiles
         .filter((f) => !srcFiles.includes(f))
         .forEach((f) => {
-          fs.unlink(path.join(destPath, f));
+          fsPromises.unlink(path.join(destPath, f));
         });
     })
     .catch(console.log);

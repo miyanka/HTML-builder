@@ -1,9 +1,9 @@
-const fs = require('fs/promises');
+const fsPromises = require('fs/promises');
 const path = require('path');
 const directoryPath = path.join(__dirname, 'secret-folder');
 
 async function getFileSize(filePath) {
-  const stats = await fs.stat(filePath);
+  const stats = await fsPromises.stat(filePath);
   return stats.size;
 }
 
@@ -22,7 +22,8 @@ function showFileData(info) {
   console.log(`${info.name} - ${info.ext} - ${info.size}b`);
 }
 
-fs.readdir(directoryPath, { withFileTypes: true })
+fsPromises
+  .readdir(directoryPath, { withFileTypes: true })
   .then((files) =>
     files
       .filter((file) => file.isFile())
